@@ -5,7 +5,8 @@ from . import views
 
 
 urlpatterns = [
-    path("", views.MoviesView.as_view()),
+    path("", views.MoviesView.as_view()),     # v1.0
+    path("<int:pk>/", views.MovieDetailView.as_view()),        # v1.0
     # path("filter/", views.FilterMoviesView.as_view(), name='filter'),
     # path("search/", views.Search.as_view(), name='search'),
     # path("add-rating/", views.AddStarRating.as_view(), name='add_rating'),

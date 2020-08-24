@@ -24,20 +24,41 @@ from .models import Movie, Category, Actor, Genre, Rating, Reviews
 #     return ip
 
 
-
+'''
+CLASS MovieDetailView - Полное описание фильма
+'''
 
 class MoviesView(View):
-    """Список фильмов"""
+    """Список фильмов v1.0"""
     def get(self, request):
         movies = Movie.objects.all()
         content = {'movie_list': movies}
         return render(request, "movies_temp/movies.html", content)
-        
-       
+
+
+ 
+# class MoviesView(GenreYear, ListView):
+#     """Список фильмов git_version"""
+#     model = Movie
+#     queryset = Movie.objects.filter(draft=False)
+#     paginate_by = 1
+
+
+
+'''
+CLASS MovieDetailView - Полное описание фильма
+'''
+
+class MovieDetailView(View):
+    """  Полное описание фильма v1.0 """
+    def get(self, request, pk):     # принимаем GET запрос
+        movie = Movie.objects.get(id=pk)
+        content = {'movie': movie}
+        return render(request, "movies_temp/movie_detail.html", content)
 
 
 # class MovieDetailView(GenreYear, DetailView):
-#     """Полное описание фильма"""
+#     """Полное описание фильма git_version"""
 #     model = Movie
 #     queryset = Movie.objects.filter(draft=False)
 #     slug_field = "url"
@@ -49,6 +70,14 @@ class MoviesView(View):
 #         return context
 #
 #
+
+
+
+
+
+
+
+
 # class AddReview(View):
 #     """Отзывы"""
 #
