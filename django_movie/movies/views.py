@@ -33,7 +33,7 @@ class MoviesView(View):
     def get(self, request):
         movies = Movie.objects.all()
         content = {'movie_list': movies}
-        return render(request, "movies_temp/movies.html", content)
+        return render(request, "movies/movies.html", content)
 
 
  
@@ -54,7 +54,7 @@ class MovieDetailView(View):
     def get(self, request, slug):     # принимаем GET запрос
         movie = Movie.objects.get(url=slug)
         content = {'movie': movie}
-        return render(request, "movies_temp/movie_detail.html", content)
+        return render(request, "movies/movie_detail.html", content)
 
 
 # class MovieDetailView(GenreYear, DetailView):
