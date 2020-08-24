@@ -2,7 +2,7 @@
 from django.shortcuts import redirect, render
 from django.views.generic.base import View
 from .models import Movie, Category, Actor, Genre, Rating, Reviews
-
+from django.views.generic import ListView
 
 
 # class GenreYear:
@@ -28,20 +28,12 @@ from .models import Movie, Category, Actor, Genre, Rating, Reviews
 CLASS MovieDetailView - Полное описание фильма
 '''
 
-class MoviesView(View):
-    """Список фильмов v1.0"""
-    def get(self, request):
-        movies = Movie.objects.all()
-        content = {'movie_list': movies}
-        return render(request, "movies/movies.html", content)
 
-
- 
-# class MoviesView(GenreYear, ListView):
-#     """Список фильмов git_version"""
-#     model = Movie
-#     queryset = Movie.objects.filter(draft=False)
-#     paginate_by = 1
+class MoviesView(ListView):
+    """Список фильмов git_version"""
+    model = Movie
+    queryset = Movie.objects.filter(draft=False)
+    template = "movies/movies.html"
 
 
 

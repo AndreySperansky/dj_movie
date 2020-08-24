@@ -9,3 +9,15 @@
 3 вариант  get_absolute_url функция из models
 
                 <a href="/{{ movie.get_absolute_url }}/" class="editContent" >{{ movie.title }}</a>
+
+
+***********************************************************************************************************
+
+
+class MoviesView(ListView):
+    """Список фильмов git_version"""
+    model = Movie
+    queryset = Movie.objects.filter(draft=False)
+    template = "movies/movies.html"
+
+************************************************************************************************************
