@@ -100,9 +100,11 @@ class Movie(models.Model):
     def __str__(self):
         return self.title
     
-    # def get_absolute_url(self):
-    #     return reverse("movie_detail", kwargs={"slug": self.url})
-    #
+    def get_absolute_url(self):
+        return reverse("movie_detail", kwargs={"slug": self.url})
+    # return reverse("имя url ", словарь параметров, передаваемых в url (ключ - slug, значение - поле url))
+    
+    
     # def get_review(self):
     #     return self.reviews_set.filter(parent__isnull=True)
     

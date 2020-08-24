@@ -50,9 +50,9 @@ CLASS MovieDetailView - Полное описание фильма
 '''
 
 class MovieDetailView(View):
-    """  Полное описание фильма v1.0 """
-    def get(self, request, pk):     # принимаем GET запрос
-        movie = Movie.objects.get(id=pk)
+    """  Полное описание фильма v1.1 """
+    def get(self, request, slug):     # принимаем GET запрос
+        movie = Movie.objects.get(url=slug)
         content = {'movie': movie}
         return render(request, "movies_temp/movie_detail.html", content)
 

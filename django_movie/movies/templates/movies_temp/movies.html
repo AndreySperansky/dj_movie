@@ -273,7 +273,12 @@
                 </div>
                 <div class="item-info-product">
                   <h4 class="">
-                    <a href="moviesingle.html" class="editContent" >{{ movie.title }}</a>
+<!--    1 вариант                -->
+<!--                    <a href="/{% url 'movie_detail' movie.url %}/" class="editContent" >{{ movie.title }}</a>-->
+<!--    2 вариант                -->
+<!--                    <a href="/{{ movie.url }}/" class="editContent" >{{ movie.title }}</a>-->
+<!--    3 вариант  get_absolute_url функция из models    -->
+                    <a href="/{{ movie.get_absolute_url }}/" class="editContent" >{{ movie.title }}</a>
                   </h4>
                   <div class="product_price">
                     <div class="grid-price">
