@@ -2,7 +2,7 @@
 from django.shortcuts import redirect, render
 from django.views.generic.base import View
 from .models import Movie, Category, Actor, Genre, Rating, Reviews
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 
 # class GenreYear:
@@ -33,28 +33,25 @@ class MoviesView(ListView):
     """Список фильмов git_version"""
     model = Movie
     queryset = Movie.objects.filter(draft=False)
-    template = "movies/movies.html"
+    # template = "movies/movies.html"
 
+# В данном классе имя template не совпадает с именем шаблона по умолчанию movie_list
 
 
 '''
 CLASS MovieDetailView - Полное описание фильма
 '''
 
-class MovieDetailView(View):
-    """  Полное описание фильма v1.1 """
-    def get(self, request, slug):     # принимаем GET запрос
-        movie = Movie.objects.get(url=slug)
-        content = {'movie': movie}
-        return render(request, "movies/movie_detail.html", content)
+class MovieDetailView(DetailView):
+    """Полное описание фильма"""
+    model = Movie
+    queryset = Movie.objects.filter(draft=False)
+    slug_field = "url"
+# Django автоматически присоединяет к имени модели Movie суффикс _detail и это совпадает с нашим именем шаблона
+# поэтому template = "movies/movie_detail.html"  не требуется
 
 
-# class MovieDetailView(GenreYear, DetailView):
-#     """Полное описание фильма git_version"""
-#     model = Movie
-#     queryset = Movie.objects.filter(draft=False)
-#     slug_field = "url"
-#
+
 #     def get_context_data(self, **kwargs):
 #         context = super().get_context_data(**kwargs)
 #         context["star_form"] = RatingForm()
