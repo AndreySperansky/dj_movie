@@ -382,8 +382,11 @@ li > a:only-child:after {
 
 /*--/banner --*/
 
+
+
 .main-banner {
-    background: url(../images/banner.jpg)no-repeat center;
+	background: url(../single-post-pic.jpg)no-repeat center;
+
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -394,14 +397,21 @@ li > a:only-child:after {
 }
 
 .main-banner.inner {
-    background: url(../images/banner.jpg)no-repeat center;
+    background: url('../images/banner.jpg')no-repeat center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     -ms-background-size: cover;
     background-size: cover;
     position: relative;
-    min-height: 20em;
+    min-height: 30em;
+}
+
+
+.bg1 {
+	background-color: rgba(0, 0, 0, 0);
+	margin-top: 0;
+	background-image: url('../images/banner.jpg');
 }
 
 /*-- place holder --*/
