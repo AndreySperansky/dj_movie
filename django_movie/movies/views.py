@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from django.views.generic.base import View
 from .models import Movie, Category, Actor, Genre, Rating, Reviews
 from django.views.generic import ListView, DetailView
+# from .forms import ReviewForm
 
 
 # class GenreYear:
@@ -61,9 +62,27 @@ class MovieDetailView(DetailView):
 #
 
 
+'''
+CLASS AddReview - Добавление отзывов
+'''
+
+class AddReview(View):
+    """Отзывы"""
+    def post(self, request, pk):
+        print(request.POST)
+        return redirect("/")
 
 
-
+# class AddReview(View):
+#     """Отзывы"""
+#     def post(self, request, pk):
+#         # print(request.POST)
+#         form = ReviewForm(request.POST)
+#         if form.is_valid():
+#             form = form.save(commit=False)
+#             form.movie_id = pk              # movie_id это заголовок столбца, поля movie таблицы reviews
+#             form.save()
+#         return redirect("/")
 
 
 
@@ -80,8 +99,11 @@ class MovieDetailView(DetailView):
 #             form.movie = movie
 #             form.save()
 #         return redirect(movie.get_absolute_url())
-#
-#
+
+
+
+
+
 # class ActorView(GenreYear, DetailView):
 #     """Вывод информации о актере"""
 #     model = Actor

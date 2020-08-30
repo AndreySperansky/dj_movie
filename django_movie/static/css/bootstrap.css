@@ -482,6 +482,11 @@ mark,
   height: auto;
 }
 
+.img-movie_shot {
+  max-width: 200px;
+  height: 150px;
+}
+
 .img-thumbnail {
   padding: 0.25rem;
   background-color: #fff;
