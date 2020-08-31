@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.views.generic.base import View
 from .models import Movie, Category, Actor, Genre, Rating, Reviews
 from django.views.generic import ListView, DetailView
-# from .forms import ReviewForm
+from .forms import ReviewForm
 
 
 # class GenreYear:
@@ -66,39 +66,38 @@ class MovieDetailView(DetailView):
 CLASS AddReview - Добавление отзывов
 '''
 
-class AddReview(View):
-    """Отзывы"""
-    def post(self, request, pk):
-        print(request.POST)
-        return redirect("/")
+# class AddReview(View):
+#     """Отзывы"""
+#     def post(self, request, pk):
+#         print(request.POST)
+#         return redirect("/")
 
 
 # class AddReview(View):
 #     """Отзывы"""
 #     def post(self, request, pk):
-#         # print(request.POST)
 #         form = ReviewForm(request.POST)
 #         if form.is_valid():
-#             form = form.save(commit=False)
+#             form = form.save(commit=False)  # приостановка сохранения формы для внесения изменений
 #             form.movie_id = pk              # movie_id это заголовок столбца, поля movie таблицы reviews
 #             form.save()
 #         return redirect("/")
 
 
 
-# class AddReview(View):
-#     """Отзывы"""
-#
-#     def post(self, request, pk):
-#         form = ReviewForm(request.POST)
-#         movie = Movie.objects.get(id=pk)
-#         if form.is_valid():
-#             form = form.save(commit=False)
-#             if request.POST.get("parent", None):
-#                 form.parent_id = int(request.POST.get("parent"))
-#             form.movie = movie
-#             form.save()
-#         return redirect(movie.get_absolute_url())
+class AddReview(View):
+    """Отзывы"""
+
+    def post(self, request, pk):
+        form = ReviewForm(request.POST)
+        movie = Movie.objects.get(id=pk)
+        if form.is_valid():
+            form = form.save(commit=False)
+            if request.POST.get("parent", None):
+                form.parent_id = int(request.POST.get("parent"))
+            form.movie = movie
+            form.save()
+        return redirect(movie.get_absolute_url())
 
 
 
