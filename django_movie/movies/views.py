@@ -93,7 +93,7 @@ class AddReview(View):
         movie = Movie.objects.get(id=pk)
         if form.is_valid():
             form = form.save(commit=False)
-            if request.POST.get("parent", None):
+            if request.POST.get("parent", None):    # в поле POST запроса ищем parent  и если его нет то будет None
                 form.parent_id = int(request.POST.get("parent"))
             form.movie = movie
             form.save()

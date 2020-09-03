@@ -3,7 +3,9 @@ from datetime import date
 
 from django.urls import reverse
 
-""" ***********************  Категории  *****************************************   """
+"""
+***********************  Категории  *****************************************
+"""
 
 
 class Category(models.Model):
@@ -105,8 +107,9 @@ class Movie(models.Model):
     # return reverse("имя url ", словарь параметров, передаваемых в url (ключ - slug, значение - поле url))
     
     
-    # def get_review(self):
-    #     return self.reviews_set.filter(parent__isnull=True)
+    def get_review(self):
+        ''' Реализуем вложенность отзывов '''
+        return self.reviews_set.filter(parent__isnull=True)
     
     class Meta:
         verbose_name = "Фильм"
