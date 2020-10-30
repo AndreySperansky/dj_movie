@@ -14,13 +14,13 @@ from django.utils.safestring import mark_safe
 
 
 # admin.site.register(Category, CategoryAdmin)      # в случае регистрации через декоратор можно удалить
-admin.site.register(Genre)
-# admin.site.register(Movie)
-admin.site.register(MovieShots)
-admin.site.register(Actor)
-admin.site.register(Rating)
-admin.site.register(RatingStar)
-# admin.site.register(Reviews)
+# admin.site.register(Genre)                          # в случае регистрации через декоратор можно удалить
+# admin.site.register(Movie)                        # в случае регистрации через декоратор можно удалить
+# admin.site.register(MovieShots)                   # в случае регистрации через декоратор можно удалить
+# admin.site.register(Actor)                        # в случае регистрации через декоратор можно удалить
+# admin.site.register(Rating)                         # в случае регистрации через декоратор можно удалить
+# admin.site.register(RatingStar)                     # в случае регистрации через декоратор можно удалить
+# admin.site.register(Reviews)                      # в случае регистрации через декоратор можно удалить
 
 
 
@@ -46,6 +46,32 @@ class ReviewInline(admin.TabularInline):
     readonly_fields = ("name", "email")
 
 
+'''
+Кадры из фильма в админке
+'''
+
+
+
+@admin.register(MovieShots)
+class MovieShotsAdmin(admin.ModelAdmin):
+    """Кадры из фильма"""
+    list_display = ("title", "movie", "get_image")
+    readonly_fields = ("get_image",)
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.image.url} width="50" height="60"')
+
+    get_image.short_description = "Изображение"
+
+
+
+
+'''
+Кадры из фильма горизонтально для передачи в админку "MovieAdmin"
+stackedInline - отображение вертикально
+TabularInline - отображение горизонтально
+'''
+
 class MovieShotsInline(admin.TabularInline):
     model = MovieShots
     extra = 1
@@ -67,26 +93,24 @@ class MovieAdmin(admin.ModelAdmin):
     list_filter = ("category", "year")
     search_fields = ("title", "category__name")
     inlines = [MovieShotsInline, ReviewInline]
+    # Вводим класс MovieShotsInline (отображение кадра)  к фильму в админке
     save_on_top = True
     save_as = True
     list_editable = ("draft",)
 #     fields = (("actors", "directors", "genres",),)
 #     actions = ["publish", "unpublish"]
 #     form = MovieAdminForm
-#     readonly_fields = ("get_image",)
+    readonly_fields = ("get_image",)
     fieldsets = (
         (None, {
             "fields": (("title", "tagline"),)
         }),
         
-        # (None, {
-        #     "fields": ("description", ("poster", "get_image"))
-        # }),
-        
         (None, {
-            "fields": ("description", ("poster", ))
+            "fields": ("description", ("poster", "get_image"))
         }),
-        
+        # Для отображения "poster", "get_image" в одной строке помещфем их в картеж
+
         (None, {
             "fields": (("year", "world_premiere", "country"),)
             
@@ -108,6 +132,7 @@ class MovieAdmin(admin.ModelAdmin):
 
     def get_image(self, obj):
         return mark_safe(f'<img src={obj.poster.url} width="100" height="110"')
+
 
 #     def unpublish(self, request, queryset):
 #         """Снять с публикации"""
@@ -133,8 +158,8 @@ class MovieAdmin(admin.ModelAdmin):
 #     unpublish.short_description = "Снять с публикации"
 #     unpublish.allowed_permissions = ('change',)
 #
-#     get_image.short_description = "Постер"
-#
+    get_image.short_description = "Постер"
+#   Отображение поля get_image как Постер
 
 
 
@@ -151,10 +176,6 @@ class MovieAdmin(admin.ModelAdmin):
 #         model = Movie
 #         fields = '__all__'
 #
-#
-
-
-
 
 
 
@@ -164,39 +185,52 @@ class MovieAdmin(admin.ModelAdmin):
 # class GenreAdmin(TranslationAdmin):
 #     """Жанры"""
 #     list_display = ("name", "url")
-#
-#
-# @admin.register(Actor)
-# class ActorAdmin(TranslationAdmin):
-#     """Актеры"""
-#     list_display = ("name", "age", "get_image")
-#     readonly_fields = ("get_image",)
-#
-#     def get_image(self, obj):
-#         return mark_safe(f'<img src={obj.image.url} width="50" height="60"')
-#
-#     get_image.short_description = "Изображение"
-#
-#
+
+
+'''
+АКТЕРЫ И РЕЖИССЕРЫ
+'''
+
+
+@admin.register(Actor)
+class ActorAdmin(admin.ModelAdmin):
+
+    """Актеры"""
+    list_display = ("name", "age", "get_image")
+    readonly_fields = ("get_image",)
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.image.url} width="50" height="60"')
+        # mark_safe выводит html не как строку а как тег
+
+    get_image.short_description = "Изображение"
+
+
+
+'''
+РЕЙТИНГ
+'''
+
 # @admin.register(Rating)
 # class RatingAdmin(admin.ModelAdmin):
 #     """Рейтинг"""
 #     list_display = ("star", "movie", "ip")
-#
-#
-# @admin.register(MovieShots)
-# class MovieShotsAdmin(TranslationAdmin):
-#     """Кадры из фильма"""
-#     list_display = ("title", "movie", "get_image")
-#     readonly_fields = ("get_image",)
-#
-#     def get_image(self, obj):
-#         return mark_safe(f'<img src={obj.image.url} width="50" height="60"')
-#
-#     get_image.short_description = "Изображение"
-#
-#
+
+'''
+КАДРЫ ИЗ ФИЛЬМА
+'''
+
+
+
+
+
 # admin.site.register(RatingStar)
-#
-# admin.site.site_title = "Django Movies"
-# admin.site.site_header = "Django Movies"
+
+
+
+
+admin.site.site_title = "Django Movies"
+admin.site.site_header = "Django Movies"
+
+# ДЛя замены стандартного заголовка админки "Администрирование Django"
+# на Django Movies
