@@ -5,7 +5,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include("movies.urls"))    # подключаем все urls из файла urls.py приложения movies в корнефой файл urls.py
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path("", include("movies.urls")),    # подключаем все urls из файла urls.py приложения movies в корневой файл urls.py
 ]
 
 if settings.DEBUG:

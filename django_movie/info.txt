@@ -2,3 +2,7 @@ https://www.youtube.com/watch?v=iKqzyxVWuPU&list=PLF-NY6ldwAWrb6nQcPL21XX_-AmivF
 
 login: superuser
 pass: superuser
+
+
+django-ckeditor - https://github.com/django-ckeditor/dj...
+plugin youtube - https://ckeditor.com/cke4/addon/youtube

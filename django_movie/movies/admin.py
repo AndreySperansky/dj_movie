@@ -3,7 +3,7 @@ from django.contrib import admin
 from .models import Category, Genre, Movie, MovieShots, Actor, Rating, RatingStar, Reviews
 
 from django.utils.safestring import mark_safe
-# from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 # from modeltranslation.admin import TranslationAdmin
 
 
@@ -21,6 +21,16 @@ from django.utils.safestring import mark_safe
 # admin.site.register(Rating)                         # в случае регистрации через декоратор можно удалить
 # admin.site.register(RatingStar)                     # в случае регистрации через декоратор можно удалить
 # admin.site.register(Reviews)                      # в случае регистрации через декоратор можно удалить
+
+class MovieAdminForm(forms.ModelForm):
+    """Форма с виджетом ckeditor"""
+    description = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+    # description_en = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = Movie
+        fields = '__all__'
+
 
 
 
@@ -99,7 +109,7 @@ class MovieAdmin(admin.ModelAdmin):
     list_editable = ("draft",)
 #     fields = (("actors", "directors", "genres",),)
 #     actions = ["publish", "unpublish"]
-#     form = MovieAdminForm
+    form = MovieAdminForm
     readonly_fields = ("get_image",)
     fieldsets = (
         (None, {
@@ -164,18 +174,6 @@ class MovieAdmin(admin.ModelAdmin):
 
 
 
-
-
-
-# class MovieAdminForm(forms.ModelForm):
-#     """Форма с виджетом ckeditor"""
-#     description_ru = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
-#     description_en = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
-#
-#     class Meta:
-#         model = Movie
-#         fields = '__all__'
-#
 
 
 
