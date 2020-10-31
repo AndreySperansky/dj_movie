@@ -14,13 +14,10 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
 # admin.site.register(Category, CategoryAdmin)      # в случае регистрации через декоратор можно удалить
-# admin.site.register(Genre)                          # в случае регистрации через декоратор можно удалить
 # admin.site.register(Movie)                        # в случае регистрации через декоратор можно удалить
 # admin.site.register(MovieShots)                   # в случае регистрации через декоратор можно удалить
 # admin.site.register(Actor)                        # в случае регистрации через декоратор можно удалить
-# admin.site.register(Rating)                         # в случае регистрации через декоратор можно удалить
-# admin.site.register(RatingStar)                     # в случае регистрации через декоратор можно удалить
-# admin.site.register(Reviews)                      # в случае регистрации через декоратор можно удалить
+
 
 class MovieAdminForm(forms.ModelForm):
     """Форма с виджетом ckeditor"""
