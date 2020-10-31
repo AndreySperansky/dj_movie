@@ -37,12 +37,15 @@ class MoviesView(ListView):
     # template = "movies/movies.html"
     # В данном классе имя template не совпадает с именем шаблона по умолчанию movie_list
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        # получаем словарь и заносим в переменную context
-        context["categories"] = Category.objects.all()
-        # добавляем ключ categories и в качестве значения внесли queryset всех наших категорий
-        return context
+# Метод закомментирован вследствие применения метода movie_tag.py для избежания дублирования кода
+# ***********************************************************************************************
+    # def get_context_data(self, *args, **kwargs):
+    #     context = super().get_context_data(*args, **kwargs)
+    #     # получаем словарь и заносим в переменную context
+    #     context["categories"] = Category.objects.all()
+    #     # добавляем ключ categories и в качестве значения внесли queryset всех наших категорий
+    #     return context
+# ***********************************************************************************************
 
 
 
@@ -58,12 +61,16 @@ class MovieDetailView(DetailView):
     slug_field = "url"
 # Django автоматически присоединяет к имени модели Movie суффикс _detail и это совпадает с нашим именем шаблона
 # поэтому template = "movies/movie_detail.html"  не требуется
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        # получаем словарь и заносим в переменную context
-        context["categories"] = Category.objects.all()
-        # добавляем ключ categories и в качестве значения внесли queryset всех наших категорий
-        return context
+
+# Метод закомментирован вследствие применения метода movie_tag.py для избежания дублирования кода
+# ***********************************************************************************************
+    # def get_context_data(self, *args, **kwargs):
+    #     context = super().get_context_data(*args, **kwargs)
+    #     # получаем словарь и заносим в переменную context
+    #     context["categories"] = Category.objects.all()
+    #     # добавляем ключ categories и в качестве значения внесли queryset всех наших категорий
+    #     return context
+# ***********************************************************************************************
 
 
 
@@ -72,8 +79,7 @@ class MovieDetailView(DetailView):
 #         context["star_form"] = RatingForm()
 #         context["form"] = ReviewForm()
 #         return context
-#
-#
+
 
 
 '''
