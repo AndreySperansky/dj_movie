@@ -26,12 +26,14 @@
                     <li>
                         <span><b>Режиссер:</b>
                             {% for movie in actor.film_director.all %}
+                    {#   film_director - related name in models.Movie для поля directors#}
                                 {{ movie.title }}
                             {% endfor %}
                         </span>
                     </li>
                     <li><span><b>Актер:</b>
                         {% for movie in actor.film_actor.all %}
+                            {#   film_actor - related name in models.Movie для поля actors#}
                             {{ movie.title }}
                         {% endfor %}
                     </span>
@@ -45,6 +47,7 @@
             </h3>
             <p class="editContent">
                 {{ actor.description|safe }}
+{#     safe - для вывода html тэга а не его кода #}
             </p>
         </div>
     </div>
