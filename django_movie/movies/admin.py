@@ -104,7 +104,6 @@ class MovieAdmin(admin.ModelAdmin):
     save_on_top = True
     save_as = True
     list_editable = ("draft",)
-#     fields = (("actors", "directors", "genres",),)
     actions = ["publish", "unpublish"]
     form = MovieAdminForm
     readonly_fields = ("get_image",)
@@ -173,7 +172,16 @@ class MovieAdmin(admin.ModelAdmin):
 #   Изменение отображение поля get_image на Постер
 
 
+'''***************************************************
+ЖАНРЫ
+******************************************************'''
 
+
+
+@admin.register(Genre)
+class GenreAdmin(admin.ModelAdmin):
+    """Жанры"""
+    list_display = ("name", "url")
 
 
 # @admin.register(Genre)

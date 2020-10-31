@@ -1,4 +1,4 @@
-
+from django.db.models import Q
 from django.shortcuts import redirect, render
 from django.views.generic.base import View
 from .models import Movie, Category, Actor, Genre, Rating, Reviews
@@ -6,16 +6,20 @@ from django.views.generic import ListView, DetailView
 from .forms import ReviewForm
 
 
-# class GenreYear:
-#     """Жанры и года выхода фильмов"""
-#
-#     def get_genres(self):
-#         return Genre.objects.all()
-#
-#     def get_years(self):
-#         return Movie.objects.filter(draft=False).values("year")
-#
-#
+
+class GenreYear:
+    """Жанры и года выхода фильмов"""
+
+    def get_genres(self):
+        return Genre.objects.all()
+
+    def get_years(self):
+        return Movie.objects.filter(draft=False).values("year")
+# Теперь мы можем наследовать данный класс в наших views и затем достать эти данные в наших
+# шаблонах. Этот подход альтернатива getContext data котрый позволяет добавить в наш контекст
+#   какие - либо данные
+
+
 # def get_client_ip(request):
 #     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
 #     if x_forwarded_for:
@@ -30,10 +34,11 @@ CLASS MovieDetailView - Полное описание фильма
 '''
 
 
-class MoviesView(ListView):
+class MoviesView(GenreYear, ListView):
     """Список фильмов git_version"""
     model = Movie
     queryset = Movie.objects.filter(draft=False)
+
     # template = "movies/movies.html"
     # В данном классе имя template не совпадает с именем шаблона по умолчанию movie_list
 
@@ -55,7 +60,7 @@ class MoviesView(ListView):
 CLASS MovieDetailView - Полное описание фильма
 '''
 
-class MovieDetailView(DetailView):
+class MovieDetailView(GenreYear, DetailView):
     """Полное описание фильма"""
     model = Movie
     queryset = Movie.objects.filter(draft=False)
@@ -125,23 +130,23 @@ class AddReview(View):
 
 
 
-class ActorView(DetailView):
+class ActorView(GenreYear, DetailView):
     """Вывод информации о актере"""
     model = Actor
     template_name = 'movies/actor.html'
     slug_field = "name"
-#
-#
-# class FilterMoviesView(GenreYear, ListView):
-#     """Фильтр фильмов"""
-#     paginate_by = 5
-#
-#     def get_queryset(self):
-#         queryset = Movie.objects.filter(
-#             Q(year__in=self.request.GET.getlist("year")) |
-#             Q(genres__in=self.request.GET.getlist("genre"))
-#         ).distinct()
-#         return queryset
+
+
+class FilterMoviesView(GenreYear, ListView):
+    """Фильтр фильмов"""
+    paginate_by = 5
+
+    def get_queryset(self):
+        queryset = Movie.objects.filter(
+            Q(year__in=self.request.GET.getlist("year")) |
+            Q(genres__in=self.request.GET.getlist("genre"))
+        ).distinct()
+        return queryset
 #
 #     def get_context_data(self, *args, **kwargs):
 #         context = super().get_context_data(*args, **kwargs)
