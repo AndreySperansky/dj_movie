@@ -1,10 +1,10 @@
-from django.db.models import Q
-from django.http import JsonResponse
+from django.db.models import Q, OuterRef, Subquery, Case, When
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import redirect, render
 from django.views.generic.base import View
 from .models import Movie, Category, Actor, Genre, Rating, Reviews
 from django.views.generic import ListView, DetailView
-from .forms import ReviewForm
+from .forms import ReviewForm, RatingForm
 
 
 
@@ -69,6 +69,12 @@ class MovieDetailView(GenreYear, DetailView):
 # Django автоматически присоединяет к имени модели Movie суффикс _detail и это совпадает с нашим именем шаблона
 # поэтому template = "movies/movie_detail.html"  не требуется
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["star_form"] = RatingForm()
+        # context["form"] = ReviewForm()
+        return context
+
 #  Использование Template tags
 # Метод закомментирован вследствие применения метода movie_tag.py для избежания дублирования кода
 # ***********************************************************************************************
@@ -82,11 +88,7 @@ class MovieDetailView(GenreYear, DetailView):
 
 
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context["star_form"] = RatingForm()
-#         context["form"] = ReviewForm()
-#         return context
+
 
 
 
@@ -171,30 +173,31 @@ class JsonFilterMoviesView(ListView):
         return JsonResponse({"movies": queryset}, safe=False)
 
 
-# class AddStarRating(View):
-#     """Добавление рейтинга фильму"""
-#
-#     def get_client_ip(self, request):
-#         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-#         if x_forwarded_for:
-#             ip = x_forwarded_for.split(',')[0]
-#         else:
-#             ip = request.META.get('REMOTE_ADDR')
-#         return ip
-#
-#     def post(self, request):
-#         form = RatingForm(request.POST)
-#         if form.is_valid():
-#             Rating.objects.update_or_create(
-#                 ip=self.get_client_ip(request),
-#                 movie_id=int(request.POST.get("movie")),
-#                 defaults={'star_id': int(request.POST.get("star"))}
-#             )
-#             return HttpResponse(status=201)
-#         else:
-#             return HttpResponse(status=400)
-#
-#
+class AddStarRating(View):
+    """Добавление рейтинга фильму"""
+
+    def get_client_ip(self, request):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        return ip
+
+    def post(self, request):
+        form = RatingForm(request.POST)
+        if form.is_valid():
+            Rating.objects.update_or_create(
+                ip=self.get_client_ip(request),
+                movie_id=int(request.POST.get("movie")),
+                defaults={'star_id': int(request.POST.get("star"))}
+            )
+            return HttpResponse(status=201)
+        else:
+            return HttpResponse(status=400)
+
+
+
 # class Search(ListView):
 #     """Поиск фильмов"""
 #     paginate_by = 3

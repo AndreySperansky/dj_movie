@@ -57,8 +57,6 @@ class ReviewInline(admin.TabularInline):
 Кадры из фильма в админке
 '''
 
-
-
 @admin.register(MovieShots)
 class MovieShotsAdmin(admin.ModelAdmin):
     """Кадры из фильма"""
@@ -213,20 +211,13 @@ class ActorAdmin(admin.ModelAdmin):
 РЕЙТИНГ
 '''
 
-# @admin.register(Rating)
-# class RatingAdmin(admin.ModelAdmin):
-#     """Рейтинг"""
-#     list_display = ("star", "movie", "ip")
-
-'''
-КАДРЫ ИЗ ФИЛЬМА
-'''
+@admin.register(Rating)
+class RatingAdmin(admin.ModelAdmin):
+    """Рейтинг"""
+    list_display = ("star", "movie", "ip")
 
 
-
-
-
-# admin.site.register(RatingStar)
+admin.site.register(RatingStar)
 
 
 
