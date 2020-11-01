@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views.generic.base import View
 from .models import Movie, Category, Actor, Genre, Rating, Reviews
@@ -16,8 +17,8 @@ class GenreYear:
     def get_years(self):
         return Movie.objects.filter(draft=False).values("year")
 # Теперь мы можем наследовать данный класс в наших views и затем достать эти данные в наших
-# шаблонах. Этот подход альтернатива getContext data котрый позволяет добавить в наш контекст
-#   какие - либо данные
+# шаблонах. Этот подход альтернатива 'get_context_data()' котрый позволяет добавить в наш контекст
+# какие - либо данные
 
 
 # def get_client_ip(request):
@@ -147,29 +148,29 @@ class FilterMoviesView(GenreYear, ListView):
             Q(genres__in=self.request.GET.getlist("genre"))
         ).distinct()
         return queryset
-#
+
 #     def get_context_data(self, *args, **kwargs):
 #         context = super().get_context_data(*args, **kwargs)
 #         context["year"] = ''.join([f"year={x}&" for x in self.request.GET.getlist("year")])
 #         context["genre"] = ''.join([f"genre={x}&" for x in self.request.GET.getlist("genre")])
 #         return context
-#
-#
-# class JsonFilterMoviesView(ListView):
-#     """Фильтр фильмов в json"""
-#
-#     def get_queryset(self):
-#         queryset = Movie.objects.filter(
-#             Q(year__in=self.request.GET.getlist("year")) |
-#             Q(genres__in=self.request.GET.getlist("genre"))
-#         ).distinct().values("title", "tagline", "url", "poster")
-#         return queryset
-#
-#     def get(self, request, *args, **kwargs):
-#         queryset = list(self.get_queryset())
-#         return JsonResponse({"movies": queryset}, safe=False)
-#
-#
+
+
+class JsonFilterMoviesView(ListView):
+    """Фильтр фильмов в json"""
+
+    def get_queryset(self):
+        queryset = Movie.objects.filter(
+            Q(year__in=self.request.GET.getlist("year")) |
+            Q(genres__in=self.request.GET.getlist("genre"))
+        ).distinct().values("title", "tagline", "url", "poster")
+        return queryset
+
+    def get(self, request, *args, **kwargs):
+        queryset = list(self.get_queryset())
+        return JsonResponse({"movies": queryset}, safe=False)
+
+
 # class AddStarRating(View):
 #     """Добавление рейтинга фильму"""
 #
