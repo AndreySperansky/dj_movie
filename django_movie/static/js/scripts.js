@@ -12,7 +12,7 @@
 }
 
 // Filter movies
-
+// Закоментировать когда нужно сделать пагинацию ************************************
 const forms = document.querySelector('form[name=filter]');
 
 forms.addEventListener('submit', function (e) {
@@ -22,6 +22,8 @@ forms.addEventListener('submit', function (e) {
     let params = new URLSearchParams(new FormData(this)).toString();
     ajaxSend(url, params);
 });
+// **********************************************************************************
+
 
 function render(data) {
     // Рендер шаблона
