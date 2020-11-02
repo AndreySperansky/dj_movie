@@ -8,6 +8,10 @@ django-ckeditor - https://github.com/django-ckeditor/dj...
 plugin youtube - https://ckeditor.com/cke4/addon/youtube
 
 
+В файле sidebar.html
+Для Работы с Ajax запросом но без пагинации (Урок 18) раскоментировать строку 13
+<form action="{% url 'json_filter' %}" method="get" name="filter">
 
-
+Для Работы без Ajax запроса для целей пагинации (Урок 20) раскоментировать строку 15
+{#<form action="{% url 'filter' %}" method="get" name="filter">#}
 

@@ -691,7 +691,7 @@ ul.tic-info li {
 
 @media only screen and (min-width: 1025px) {
     .pagination a.pagination__link:hover {
-        background: rgba(102, 88, 175, .15)
+        background: rgba(102, 88, 175, .35)
     }
 }
 
@@ -1016,7 +1016,7 @@ ul.w3layouts-box-list li {
     text-transform: uppercase;
     font-weight: 600;
     text-decoration: none;
-    color: #fff;
+    color: #6163b9;
     padding: 0;
 
 }
