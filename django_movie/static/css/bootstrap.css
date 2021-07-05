@@ -3270,11 +3270,11 @@ tbody.collapse.show {
 
 .dropdown-item {
   display: block;
-  width: 100%;
+  /*width: 100%;*/
   padding: 0.25rem 1.5rem;
   clear: both;
   font-weight: 400;
-  color: #212529;
+  color: #191d1f;
   text-align: inherit;
   white-space: nowrap;
   background-color: transparent;

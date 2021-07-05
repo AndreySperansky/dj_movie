@@ -2,20 +2,21 @@
 {#   Template tag  #}
 <header class="header">
   <div class="container-fluid px-lg-5">
+
+    <div id="logo" >
+      <h2> <a href="/" class="editContent" style="outline: none; outline-offset: 2px; cursor: inherit; color: rgb(255, 255, 255); background-color: rgba(0, 0, 0, 0); font-family:  sans-serif;">Dj.Movie</a></h2>
+    </div>
     <!-- nav -->
-    <nav class="py-4">
-      <div id="logo">
-        <h1> <a href="index.html" class="editContent" style="outline: none; outline-offset: -2px; cursor: inherit; color: rgb(255, 255, 255); font-size: 40px; background-color: rgba(0, 0, 0, 0); font-family:  sans-serif;">DjangoMovie</a></h1>
-      </div>
-      
+    <nav class='my-2'>
       <label for="drop" class="toggle">Menu</label>
       <input type="checkbox" id="drop">
-      <ul class="menu mt-2">
+
+      <ul class="menu">
         <li class="active"><a href="/">Главная</a></li>
         <li>
           <!-- First Tier Drop Down -->
           <label for="drop-2" class="toggle">Категории <span class="fa fa-angle-down" aria-hidden="true" ></span> </label>
-          <a href="#">Категории <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+          <a href="#" style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">Категории <span class="fa fa-angle-down" aria-hidden="true"></span></a>
           <input type="checkbox" id="drop-2">
           <ul>
           {#   Template tag  #}
@@ -25,7 +26,32 @@
             {% endfor %}
           </ul>
         </li>
-        <li><a href="contact.html" style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">Вход</a></li>
+        {% if user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;" id="userDropdown" href="#" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">{{ user.first_name|default:'Noname' }} <img
+                    src="/media/{{ user.avatar|default:'avatars/avatar-placeholder2.png' }}" alt="..."
+                    class="rounded-circle" width="40"></a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+              <a class="dropdown-item" href="{% url 'authapp:logout' %}">LOG OUT</a>
+              <div class="dropdown-divider"></div>
+              <a id="signup" class="dropdown-item" href="{% url 'authapp:edit' %}">PROFILE</a>
+            </div>
+          </li>
+
+        {% else %}
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;" id="userDropdown" href="#" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false"><span style="font-size: large" class="Heading fa fa-user-circle"></span></a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+              <a id="login" class="dropdown-item" href="{% url 'authapp:login' %}">LOG IN</a>
+              <div class="dropdown-divider"></div>
+              <a id="signup" class="dropdown-item" href="{% url 'authapp:register' %}">SIGN UP</a>
+            </div>
+          </li>
+
+        {% endif %}
       </ul>
     </nav>
     <!-- //nav -->
@@ -34,7 +60,7 @@
 <!-- //header -->
 <!--/banner-->
 <div class="banner-info">
-  <p class="editContent" >лучший сайт на django 3</p>
+  <p class="editContent" >Andrey.Speransky сайт на django 3</p>
   <h3 class="mb-4 editContent">Все о кино</h3>
   <div class="ban-buttons">
   </div>

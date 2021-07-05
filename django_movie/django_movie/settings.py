@@ -32,6 +32,9 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'movies',
     'contact',
+    'widget_tweaks',
+    'crispy_forms',
+    'authapp.apps.AuthappConfig'
 ]
 
 MIDDLEWARE = [
@@ -190,5 +193,8 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+
+AUTH_USER_MODEL = 'authapp.User'
+# LOGIN_URL = '/auth/login/'
 
 SITE_ID = 1

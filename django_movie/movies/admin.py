@@ -182,10 +182,6 @@ class GenreAdmin(admin.ModelAdmin):
     list_display = ("name", "url")
 
 
-# @admin.register(Genre)
-# class GenreAdmin(TranslationAdmin):
-#     """Жанры"""
-#     list_display = ("name", "url")
 
 
 '''***************************************************

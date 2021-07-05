@@ -1,7 +1,7 @@
 https://www.youtube.com/watch?v=iKqzyxVWuPU&list=PLF-NY6ldwAWrb6nQcPL21XX_-AmivFAYq&index=13
 
-login: superuser
-pass: superuser
+login: admin
+pass: admin
 
 
 django-ckeditor - https://github.com/django-ckeditor/dj...

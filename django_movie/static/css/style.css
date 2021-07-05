@@ -139,6 +139,11 @@ nav ul li {
 
 /* Styling the links */
 
+.menu {
+    display: flex;
+    align-items: center;
+}
+
 .menu li a {
     font-weight: 700;
     font-size: 0.8em;
@@ -147,7 +152,7 @@ nav ul li {
     padding-right: 0;
     padding: 10px 0;
     margin: 0px 1em;
-    color: #fff;
+    /*color: #fff;*/
     text-transform: uppercase;
     -webkit-transition: 0.5s all ease;
     -moz-transition: 0.5s all ease;
@@ -239,8 +244,9 @@ li > a:only-child:after {
     #logo {
         display: block;
         padding: 0;
-        width: 100%;
-        text-align: center;
+        /*width: 100%;*/
+        /*text-align: center;*/
+        vertical-align: middle;
         float: none;
     }
 
@@ -337,7 +343,7 @@ li > a:only-child:after {
     nav ul ul {
         float: none;
         position: static;
-        color: #ffffff;
+        color: #fff;
         /* has to be the same number as the "line-height" of "nav a" */
     }
 
@@ -356,6 +362,7 @@ li > a:only-child:after {
         display: block;
         width: 100%;
         padding: 0;
+        color: black;
     }
 
     nav ul ul ul li {
@@ -1466,6 +1473,10 @@ a.move-top span {
     }
 
     li.nav-item {
+        margin-right: 0;
+    }
+
+    .nav-item {
         margin-right: 0;
     }
 

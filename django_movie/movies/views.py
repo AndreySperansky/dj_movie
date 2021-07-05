@@ -36,7 +36,7 @@ CLASS MovieDetailView - Полное описание фильма
 
 
 class MoviesView(GenreYear, ListView):
-    """Список фильмов git_version"""
+    # Список фильмов
     model = Movie
     queryset = Movie.objects.filter(draft=False)
     paginate_by = 3
@@ -96,13 +96,6 @@ class MovieDetailView(GenreYear, DetailView):
 '''
 CLASS AddReview - Добавление отзывов
 '''
-
-# class AddReview(View):
-#     """Отзывы"""
-#     def post(self, request, pk):
-#         print(request.POST)
-#         return redirect("/")
-
 
 # class AddReview(View):
 #     """Отзывы"""
