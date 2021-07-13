@@ -408,7 +408,7 @@ li > a:only-child:after {
 }
 
 .main-banner.inner {
-    background: url('../images/banner.jpg')no-repeat center;
+    background: url('../images/frozen-2.jpg')no-repeat center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -422,7 +422,7 @@ li > a:only-child:after {
 .bg1 {
 	background-color: rgba(0, 0, 0, 0);
 	margin-top: 0;
-	background-image: url('../images/banner.jpg');
+	background-image: url('../images/frozen-2.jpg');
 }
 
 /*-- place holder --*/
@@ -768,17 +768,18 @@ ul.tic-info li {
 
 
 /*-- /New-Arrivals --*/
-.product-shoe-info {
+.movie-info {
     padding: 0 0 15px 0;
     border: 1px solid #e4e4e4;
 }
 
-.item-info-product h4 a {
-    color: #080808;
+.movie-info-title h4 a {
+    /*color: #080808;*/
     font-size: 15px;
     letter-spacing: 1px;
     text-transform: uppercase;
     font-weight: 700;
+    color: #ff4c4c !important;
 }
 
 span.money {
@@ -788,10 +789,12 @@ span.money {
     letter-spacing: 2px;
 }
 
-.product_price {
-    margin: 1em 0 0 0;
+.movie_list {
+    color: #ff4c4c !important;
+    font-size: 1.2rem;
+    margin: 0 0 0 0;
     padding: 1em 0 0 0;
-    border-top: 1px solid #ddd;
+    /*border-top: 1px solid #ddd;*/
 }
 
 ul.stars li {
@@ -1033,7 +1036,7 @@ ul.w3layouts-box-list li {
 }
 
 .desc1-left {
-    border: 1px solid #ddd;
+    border-left: 1px solid #ddd;
 }
 
 .desc1-right h3 {
