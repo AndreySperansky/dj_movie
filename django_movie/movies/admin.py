@@ -196,7 +196,7 @@ class ActorAdmin(admin.ModelAdmin):
     readonly_fields = ("get_image",)
 
     def get_image(self, obj):
-        return mark_safe(f'<img src={obj.image.url} width="50" height="60"')
+        return mark_safe(f'<img src={obj.image.url} width="50"')
         # mark_safe выводит html не как строку а как тег
 
     get_image.short_description = "Изображение"

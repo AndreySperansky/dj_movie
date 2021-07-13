@@ -163,19 +163,22 @@ nav ul li {
 
 .menu li ul li a {
     color: #555;
-    padding: 10px 10px;
+    padding: 7px 0px;
     font-size: 0.8em;
+
 }
 
 
 .menu li ul li:hover {
     background: #f8f9fa !important;
+    border-radius: 10px;
 }
 
 /* Background color change on Hover */
 
 nav .menu li a:hover {
     color: #ff4c4c !important;
+
 }
 
 .menu li.active a {
@@ -189,9 +192,10 @@ nav ul ul {
     display: none;
     position: absolute;
     /* has to be the same number as the "line-height" of "nav a" */
-    top: 30px;
+    top: 40px;
     background: #fff;
-    padding: 10px;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 /* Display Dropdowns on Hover */
@@ -203,7 +207,7 @@ nav ul li:hover > ul {
 /* Fisrt Tier Dropdown */
 
 nav ul ul li {
-    width: 170px;
+    width: 180px;
     float: none;
     display: list-item;
     position: relative;
@@ -225,7 +229,7 @@ nav ul ul ul li {
     position: relative;
     top: -60px;
     /* has to be the same number as the "width" of "nav ul ul li" */
-    left: 170px;
+    left: 180px;
 }
 
 
@@ -392,7 +396,7 @@ li > a:only-child:after {
 
 
 .main-banner {
-	background: url(../single-post-pic.jpg)no-repeat center;
+	background: url(../images/izgoy_1.jpg)no-repeat center;
 
     -webkit-background-size: cover;
     -moz-background-size: cover;

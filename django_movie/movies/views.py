@@ -39,7 +39,7 @@ class MoviesView(GenreYear, ListView):
     # Список фильмов
     model = Movie
     queryset = Movie.objects.filter(draft=False)
-    paginate_by = 3
+    paginate_by = 6
 
     # template = "movies/movies.html"
     # В данном классе имя template не совпадает с именем шаблона по умолчанию movie_list
@@ -136,7 +136,7 @@ class ActorView(GenreYear, DetailView):
 
 class FilterMoviesView(GenreYear, ListView):
     """Фильтр фильмов"""
-    paginate_by = 2
+    paginate_by = 6
 
     def get_queryset(self):
         queryset = Movie.objects.filter(
@@ -194,7 +194,7 @@ class AddStarRating(View):
 
 class Search(ListView):
     """Поиск фильмов"""
-    paginate_by = 3
+    paginate_by = 6
 
     def get_queryset(self):
         return Movie.objects.filter(title__icontains=self.request.GET.get("q"))
