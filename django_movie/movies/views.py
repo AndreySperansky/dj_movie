@@ -15,7 +15,8 @@ class GenreYear:
         return Genre.objects.all()
 
     def get_years(self):
-        return Movie.objects.filter(draft=False).values("year")
+        return Movie.objects.filter(draft=False).values("year").order_by('year').distinct()
+
 # Теперь мы можем наследовать данный класс в наших views и затем достать эти данные в наших
 # шаблонах. Этот подход альтернатива 'get_context_data()' котрый позволяет добавить в наш контекст
 # какие - либо данные
@@ -30,9 +31,6 @@ class GenreYear:
 #     return ip
 
 
-'''
-CLASS MovieDetailView - Полное описание фильма
-'''
 
 
 class MoviesView(GenreYear, ListView):
@@ -42,7 +40,7 @@ class MoviesView(GenreYear, ListView):
     paginate_by = 6
 
     # template = "movies/movies.html"
-    # В данном классе имя template не совпадает с именем шаблона по умолчанию movie_list
+    # Если имя шаблона не совпадает с таковым по умолчанию (movie_list)
 
 #  Использование Template tags
 # Метод закомментирован вследствие применения метода movie_tag.py для избежания дублирования кода
@@ -55,12 +53,6 @@ class MoviesView(GenreYear, ListView):
     #     return context
 # ***********************************************************************************************
 
-
-
-
-'''
-CLASS MovieDetailView - Полное описание фильма
-'''
 
 class MovieDetailView(GenreYear, DetailView):
     """Полное описание фильма"""
@@ -77,7 +69,8 @@ class MovieDetailView(GenreYear, DetailView):
         return context
 
 #  Использование Template tags
-# Метод закомментирован вследствие применения метода movie_tag.py для избежания дублирования кода
+# Метод закомментирован вследствие применения метода movie_tag.py (подключается в шаблоне)
+# для избежания дублирования кода
 # ***********************************************************************************************
     # def get_context_data(self, *args, **kwargs):
     #     context = super().get_context_data(*args, **kwargs)
@@ -86,26 +79,6 @@ class MovieDetailView(GenreYear, DetailView):
     #     # добавляем ключ categories и в качестве значения внесли queryset всех наших категорий
     #     return context
 # ***********************************************************************************************
-
-
-
-
-
-
-
-'''
-CLASS AddReview - Добавление отзывов
-'''
-
-# class AddReview(View):
-#     """Отзывы"""
-#     def post(self, request, pk):
-#         form = ReviewForm(request.POST)
-#         if form.is_valid():
-#             form = form.save(commit=False)  # приостановка сохранения формы для внесения изменений
-#             form.movie_id = pk              # movie_id это заголовок столбца, поля movie таблицы reviews
-#             form.save()
-#         return redirect("/")
 
 
 
@@ -133,6 +106,9 @@ class ActorView(GenreYear, DetailView):
     template_name = 'movies/actor.html'
     slug_field = "name"
 
+########################################################################################
+#                           Фильтрация фильмов
+########################################################################################
 
 class FilterMoviesView(GenreYear, ListView):
     """Фильтр фильмов"""

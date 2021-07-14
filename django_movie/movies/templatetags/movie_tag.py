@@ -10,6 +10,7 @@ def get_categories():
     return Category.objects.all()
 
 
+# inclusion_tag модет рендерить шаблон
 @register.inclusion_tag('movies/tags/last_movie.html/')
 def get_last_movies(count=5):
     movies = Movie.objects.order_by("-id")[:count]
