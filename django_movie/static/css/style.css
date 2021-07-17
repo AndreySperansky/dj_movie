@@ -777,7 +777,7 @@ ul.tic-info li {
     /*color: #080808;*/
     font-size: 15px;
     letter-spacing: 1px;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     font-weight: 700;
     color: #ff4c4c !important;
 }
